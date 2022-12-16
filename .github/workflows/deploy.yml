@@ -12,8 +12,8 @@ jobs:
     steps:
       - uses: actions/checkout@v3
       # - run: sudo docker login -u ${{ secrets.DOCKER_USERNAME }} -p ${{ secrets.DOCKER_PASSWORD }}
-      - run: docker build -t ${{ secrets.DOCKER_USERNAME }}/docker-course -f Dockerfile.dev .
-      - run: docker run -e CI=true ${{ secrets.DOCKER_USERNAME }}/docker-course npm test
+      - run: docker build . -t docker-course -f Dockerfile.dev
+      - run: docker run -e CI=true docker-course npm test
 
       - name: Generate deployment package
         run: zip -r deploy.zip . -x '*.git*'
